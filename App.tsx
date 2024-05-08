@@ -7,6 +7,9 @@ import * as eva from '@eva-design/eva';
 import { StackNavigation } from './src/presentation/navigation/StackNavigation';
 import { default as themeColors } from './theme.json';
 import { AuthProvider } from './src/presentation/providers/AuthProvider';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const colorScheme = useColorScheme();
@@ -18,7 +21,7 @@ const App = () => {
     : theme['color-basic-100']
 
   return (
-    <>
+    <QueryClientProvider client={queryClient}>
       <IconRegistry icons={EvaIconsPack} />
       <ApplicationProvider {...eva} theme={{ ...theme, ...themeColors }}>
         <NavigationContainer theme={{
@@ -37,7 +40,7 @@ const App = () => {
           </AuthProvider>
         </NavigationContainer>
       </ApplicationProvider>
-    </>
+    </QueryClientProvider>
   )
 }
 

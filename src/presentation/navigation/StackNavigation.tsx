@@ -35,9 +35,9 @@ export const StackNavigation = () => {
             <Stack.Screen
                 options={{
                     cardStyleInterpolator: fadeAnimation
-                }}
+            }}
                 name="LoadingScreen"
-                component={LoadingScreen}
+            component={LoadingScreen}
             />
 
             <Stack.Screen
