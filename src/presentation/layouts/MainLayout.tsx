@@ -1,12 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import { Divider, Layout, TopNavigation, TopNavigationAction, Icon } from '@ui-kitten/components';
-import { PropsWithChildren } from "react";
+import React, { PropsWithChildren } from "react";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { MyIcon } from "../components/ui/MyIcon";
 
-interface Props extends PropsWithChildren {
+interface Props {
     title: string;
-    subTitle: string;
+    subTitle?: string;
+    children?: React.ReactNode;
 
     rightAction?: () => void;
     rightActionIcon?: string;
