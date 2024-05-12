@@ -2,7 +2,7 @@ import { useRef } from "react"
 import { ScrollView } from "react-native"
 import { StackScreenProps } from "@react-navigation/stack"
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
-import { Layout, Input, ButtonGroup, Button, useTheme } from "@ui-kitten/components"
+import { Layout, Input, ButtonGroup, Button, useTheme, Text } from "@ui-kitten/components"
 import { Formik } from "formik"
 import { MainLayout } from "../../layouts/MainLayout"
 import { RootStackParams } from "../../navigation/StackNavigation"
@@ -11,6 +11,7 @@ import { MyIcon } from "../../components/ui/MyIcon"
 import { updateCreateProduct, getProductById } from "../../../actions/products"
 import { ProductImages } from "../../components/products/ProductImages"
 import { genders, sizes } from "../../../config/constants/constants"
+import { CameraAdapter } from "../../../config/adapters/camera-adapter"
 
 interface Props extends StackScreenProps<RootStackParams, 'ProductScreen'> { };
 
@@ -48,7 +49,12 @@ export const ProductScreen = ({ route }: Props) => {
                     <MainLayout
                         title={values.title}
                         subTitle={`Precio: ${values.price}`}
-                        rightAction={() => console.log('Hola mundo')}
+                        rightAction={async () => {
+                            // !: Abrir camara y tomar fotos
+                            // const photos = await CameraAdapter.takePicture();
+                            const photos = await CameraAdapter.getPicturesFromLibraty();
+                            setFieldValue('images', [...values.images, ...photos])
+                        }}
                         rightActionIcon="camera-outline"
                     >
                         <ScrollView style={{ flex: 1 }}>
